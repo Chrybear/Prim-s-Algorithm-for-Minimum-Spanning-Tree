@@ -38,7 +38,6 @@ def prim(w):
 
 
 def main():
-    print('Yer doing good, lad!')
     ifn = math.inf
 
     w = [[0, 1, 3, ifn, ifn],
