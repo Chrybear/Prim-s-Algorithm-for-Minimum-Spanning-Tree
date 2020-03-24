@@ -1,39 +1,35 @@
-#   Author: Charles Ryan Barrett
-#   Purpose: Create a minimum spanning tree
-#   Input: A square 2-D array of weights taken from a graph of vertices.
-#   Output: Path for a minimum spanning tree based on given weights
-#   For: CSC 320 bonus points
+#   Author: Charles Ryan Barrett.
+#   Purpose: Create a minimum spanning tree using Prim's algorithm.
+#   Input: An n>=2 size 2-D array representing weights of a connect, undirected graph with columns and rows indexed from
+#   0 to (n-1).
+#   Output: Set of edges for a Minimum Spanning Tree of the entered graph (*Note to make things simpler the output
+#   will show the vertices starting at 1 to n instead of 0 to (n-1).).
+#   For: CSC 320 bonus points.
 
 import math
 
+
 def prim(w):
     f = []  # list of edges
-    nearest = [1]*(len(w)-1)
+    nearest = [0]*(len(w))
+    # Fill up initial distance array
+    distance = w[0][0:]
     vnear = 0
 
-    # Fill up distance array
-    distance = w[0][1:]
-
-    for i in range(1, len(w)):
-        miny = math.inf
-        print('Distance = ',distance)
-        print('Nearest = ',nearest)
-        print()
-        for j in range(0, len(distance)):
-            if 0 <= distance[j] < miny:
-                miny = distance[j]
+    for i in range(0, len(w) - 1):
+        m = math.inf
+        for j in range(1, len(distance)):
+            if 0 <= distance[j] < m:
+                m = distance[j]
                 vnear = j
-
-        edge = [nearest[vnear] + 1, vnear + 1]  # Adding 1 because most vertices don't start at 1. For display only
-        f.append(edge)
+        # Add edge to our MST
+        f.append([vnear + 1, nearest[vnear] + 1])   # adding 1 to make vertices start at 1 instead of 0
         distance[vnear] = -1
 
-        for j in range(0, len(distance)):
-            if w[j][vnear] < distance[j]:
+        for j in range(1, len(distance)):
+            if w[j][vnear] < distance[j] != -1:
                 distance[j] = w[j][vnear]
                 nearest[j] = vnear
-    print(distance)
-    print(nearest)
     return f
 
 
@@ -46,7 +42,10 @@ def main():
          [ifn, 6, 4, 0, 5],
          [ifn, ifn, 2, 5, 0]
          ]
-    print(prim(w))
+    if len(w) < 2:
+        print("Size MUST be >= 2")
+    else:
+        print("Minimum Spanning Tree is ", prim(w))
 
 
 if __name__ == '__main__':
