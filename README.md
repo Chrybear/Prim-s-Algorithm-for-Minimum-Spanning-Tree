@@ -14,5 +14,14 @@ There are no added preperations to run the program. Simply download it and run.
 It will run the default w value as shown above and return the minimum spanning tree of it.
 
 To test other vertices, simple replace w's value with a 2-d array representing the new vertices and edges
+
 *WARNING the new one must have valid edges. If the changed w does not represent a valid set of connected vertices, errors may occur.
 
+
+Another example vertices to test with:
+[[0, ifn, 4, 1, ifn],
+[ifn, 0, 3, 1, 3],
+[4, 3, 0, ifn, ifn],
+[1, 1, ifn, 0, 2],
+[2, 3, ifn, 2, 0]
+ ]
